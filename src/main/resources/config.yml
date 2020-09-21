@@ -1,0 +1,48 @@
+
+
+# Settings
+
+
+ # How many blocks away should we detect before pushing?
+ # EXAMPLE: Player X has pushback on, and Player Y gets within 5 blocks of Player X, Player Y will be thrown back.
+push-back-length: 5
+
+ # Should we check for updates?
+check-for-update: true
+
+ # Should you take fall damage after being pushed backwards?
+enable-fall-damage: true
+
+# Permissions
+
+
+ # Permission to use /pushback
+permission: 'pushback.use'
+
+ # Permission required to use /PushBack reload
+reload-permission: 'pushback.reload'
+
+ # Permission required to use /pushback (player)
+multiplayer-permission: 'pushback.multiplayer'
+
+
+# Messages
+
+
+ # Message sent if you don't have permission to use /pushback, or /pushback (player)
+no-permission: '&cYou do not have permission to use this command!'
+
+enabled-message: '&aYou have enabled PushBack!'
+disabled-message: '&cYou have disabled PushBack!'
+executor-enabled-message: '&aYou have enabled PushBack for &e%player%&a!'
+executor-disabled-message: '&cYou have disabled PushBack for &e%player%&c!'
+
+
+# If you like this plugin, please review it at https://www.spigotmc.org/resources/pushback-push-away-the-nons-with-style.81904/
+# If you encounter an error or problem, contact me at Raymond#0001
+
+# Copyright Reflexian Inc. 2020, all rights reserved.
+
+# DO NOT EDIT
+config-version: 3.0
+# DO NOT EDIT

@@ -1,0 +1,10 @@
+name: PushBack
+version: ${project.version}
+main: com.reflexian.pushback.Pushback
+description: A simple pushback plugin
+website: Reflexian.com
+author: Raymond#0001
+commands:
+  pushback:
+    usage: /<command>
+    description: Test4
