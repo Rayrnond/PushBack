@@ -1,7 +1,8 @@
 package com.reflexian.pushback.Events;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import com.reflexian.pushback.Utils.Effects;
+import com.reflexian.pushback.Utils.Sounds;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -127,6 +128,12 @@ public class Playercheck implements Listener, CommandExecutor {
                 if ((en instanceof Player)) {
                     Vector v = en.getLocation().getDirection().multiply(-0.83).setY(1);
                     en.setVelocity(v);
+                    if (main.getConfig().getBoolean("sounds-enabled")) {
+                        new Sounds().PlaySound(event.getPlayer(), Sound.valueOf(main.getConfig().getString("sound-effect-2")));
+                    }
+                    if (main.getConfig().getBoolean("particles-enabled")) {
+                        new Effects().PlayEffect(((Player) en).getPlayer(), Effect.valueOf(main.getConfig().getString("particle")));
+                    }
                     if (antiDamage.contains(en.getUniqueId())) {
                         return;
                     } else {
@@ -153,6 +160,12 @@ public class Playercheck implements Listener, CommandExecutor {
                     UUID ID = e.getUniqueId();
                     Vector v = player.getLocation().getDirection().multiply(-0.83).setY(1);
                     player.setVelocity(v);
+                    if (main.getConfig().getBoolean("sounds-enabled")) {
+                        new Sounds().PlaySound(player, Sound.valueOf(main.getConfig().getString("sound-effect")));
+                    }
+                    if (main.getConfig().getBoolean("particles-enabled")) {
+                        new Effects().PlayEffect(player, Effect.valueOf(main.getConfig().getString("particle")));
+                    }
                     if (antiDamage.contains(player.getUniqueId())) {
                         return;
                     } else {
@@ -179,4 +192,6 @@ public class Playercheck implements Listener, CommandExecutor {
             }
         }
     }
+
+
 }

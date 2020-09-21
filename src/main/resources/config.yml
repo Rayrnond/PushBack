@@ -13,6 +13,16 @@ check-for-update: true
  # Should you take fall damage after being pushed backwards?
 enable-fall-damage: true
 
+ # Sounds !!!  |  MUST BE A VALID 1.8 SOUND ONLY !!!
+sounds-enabled: true
+sound-effect: ANVIL_LAND # The sound played to the player who gets pushed back
+sound-effect-2: ANVIL_LAND # The sound played to the player who pushed someone away
+
+ # Particles !!! | MUST BE A VALID 1.8 PARTICLE ONLY !!!
+particles-enabled: true
+particle: MOBSPAWNER_FLAMES # The particle played to the player who gets pushed back
+
+
 # Permissions
 
 
