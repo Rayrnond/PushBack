@@ -7,4 +7,4 @@ author: Raymond#0001
 commands:
   pushback:
     usage: /<command>
-    description: Test4
+    description: The main command to trigger PushBack
