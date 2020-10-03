@@ -46,11 +46,11 @@ public final class Pushback extends JavaPlugin implements Listener {
             e.printStackTrace();
         }
         boolean activateplugin = Boolean.parseBoolean(scanner.nextLine());
-        int pluginversion = Integer.parseInt(scanner.nextLine());
+        String pluginversion = scanner.nextLine();
         boolean checkforupdate = getConfig().getBoolean("check-for-update");
         String link = scanner.nextLine();
         scanner.close();
-        int configversion = getConfig().getInt("config-version");
+        String configversion = getConfig().getString("config-version");
         if (!activateplugin) {
             getLogger().info("================== DISABLED ==================");
             getLogger().info("This plugin has lost support and has been disabled");
@@ -59,7 +59,7 @@ public final class Pushback extends JavaPlugin implements Listener {
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         } else {
             if (checkforupdate) {
-                if (configversion != pluginversion) {
+                if (!configversion.equals(pluginversion)) {
                     getLogger().info("================== WARNING ==================");
                     getLogger().info("You do not have the most updated version of PushBack!");
                     getLogger().info("Download at: " + link);

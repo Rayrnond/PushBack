@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
@@ -46,14 +47,34 @@ public class Playercheck implements Listener, CommandExecutor {
         String nopermissionmessage = main.getConfig().getString("no-permission");
         if (sender instanceof ConsoleCommandSender) {
             if (args.length == 0) {
-                System.out.println("You are console! Console is not a player and cannot execute /pushback! Console can only '/pushback reload' and '/pushback updatelink'");
+                main.getLogger().warning("That is not a valid argument! Try (reload,updatelink,<player name>)!");
+                return true;
             } else if (args[0].equalsIgnoreCase("reload")) {
                 main.reloadConfig();
-                System.out.println("You have successfully reload the PushBack configuration files!");
+                main.getLogger().info(colorize(Objects.requireNonNull(main.getConfig().getString("reload-message"))));
+                return true;
             } else if (args[0].equalsIgnoreCase("updatelink")) {
                 System.out.println("Update Link: XXX");
-            } else {
-                System.out.println("That is not a valid command for console to execute!");
+            } else if (args.length == 1) {
+                Player player = Bukkit.getPlayerExact(args[0]);
+
+                if (player == null) {
+                    main.getLogger().warning("That is not a valid player or argument!");
+                    return true;
+                } else {
+                    if (!toggleList.contains(player.getUniqueId())) {
+                        toggleList.add(player.getUniqueId());
+                        player.sendMessage(colorize(Objects.requireNonNull(main.getConfig().getString("enabled-message"))));
+                        main.getLogger().info((main.getConfig().getString("executor-enabled-message").replace("%player%", player.getDisplayName()).replace("&", "")));
+                        return true;
+                    } else {
+                        toggleList.remove(player.getUniqueId());
+                        player.sendMessage(colorize(Objects.requireNonNull(main.getConfig().getString("disabled-message"))));
+                        main.getLogger().info((main.getConfig().getString("executor-disabled-message").replace("%player%", player.getDisplayName()).replace("&", "")));
+                        return true;
+                    }
+                }
+
             }
             return true;
         }
@@ -65,26 +86,23 @@ public class Playercheck implements Listener, CommandExecutor {
             return true;
         }
         if (args.length == 0) {
-            UUID ID = player.getUniqueId();
             if (!toggleList.contains(player.getUniqueId())) {
                 toggleList.add(player.getUniqueId());
-                String enabledpushback = main.getConfig().getString("enabled-message");
-                player.sendMessage(colorize(enabledpushback));
+                player.sendMessage(colorize(main.getConfig().getString("enabled-message")));
                 return true;
             } else {
                 toggleList.remove(player.getUniqueId());
-                String disabledpushback = main.getConfig().getString("disabled-message");
-                player.sendMessage(colorize(disabledpushback));
+                player.sendMessage(colorize(main.getConfig().getString("disabled-message")));
                 return true;
             }
         } else if (args[0].equalsIgnoreCase("reload")) {
-            String reloadpermission = main.getConfig().getString("reload-permission");
-            if (!player.hasPermission(reloadpermission)) {
-                player.sendMessage(colorize(reloadpermission));
+            if (!player.hasPermission(main.getConfig().getString("reload-permission"))) {
+                player.sendMessage(colorize(main.getConfig().getString("no-permission")));
                 return true;
             }
-            player.sendMessage(ChatColor.GREEN + "You have successfully reloaded the configuration files!");
+            player.sendMessage(colorize(colorize(main.getConfig().getString("reload-message"))));
             main.reloadConfig();
+            return true;
         } else {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null) {
@@ -93,25 +111,18 @@ public class Playercheck implements Listener, CommandExecutor {
             } else {
                 if (!toggleList.contains(target.getUniqueId())) {
                     toggleList.add(target.getUniqueId());
-                    String enabledpushback = main.getConfig().getString("enabled-message");
-                    String executorenabledpushback = main.getConfig().getString("executor-enabled-message");
-                    executorenabledpushback = executorenabledpushback.replace("%player%", target.getDisplayName());
-                    target.sendMessage(colorize(enabledpushback));
-                    player.sendMessage(colorize(executorenabledpushback));
+                    target.sendMessage(colorize(main.getConfig().getString("enabled-message")));
+                    player.sendMessage(colorize(main.getConfig().getString("executor-enabled-message").replace("%player%", target.getDisplayName())));
                     return true;
                 } else {
                     toggleList.remove(target.getUniqueId());
-                    String disabledpushback = main.getConfig().getString("disabled-message");
-                    String executordisabledpushback = main.getConfig().getString("executor-disabled-message");
-                    executordisabledpushback = executordisabledpushback.replace("%player%", target.getDisplayName());
-                    target.sendMessage(colorize(disabledpushback));
-                    player.sendMessage(colorize(executordisabledpushback));
+                    target.sendMessage(colorize(main.getConfig().getString("disabled-message")));
+                    player.sendMessage(colorize(main.getConfig().getString("executor-disabled-message").replace("%player%", target.getDisplayName())));
                     return true;
                 }
             }
 
         }
-        return true;
     }
 
     @EventHandler

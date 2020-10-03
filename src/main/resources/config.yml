@@ -31,6 +31,7 @@ permission: 'pushback.use'
 
  # Permission required to use /PushBack reload
 reload-permission: 'pushback.reload'
+reload-message: '&aSuccessfully reloaded PushBack!'
 
  # Permission required to use /pushback (player)
 multiplayer-permission: 'pushback.multiplayer'
@@ -54,5 +55,5 @@ executor-disabled-message: '&cYou have disabled PushBack for &e%player%&c!'
 # Copyright Reflexian Inc. 2020, all rights reserved.
 
 # DO NOT EDIT
-config-version: 4.0
+config-version: 4.1
 # DO NOT EDIT
