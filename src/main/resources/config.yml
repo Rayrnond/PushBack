@@ -1,30 +1,21 @@
 
 
-# Settings
+# --- Settings ---
 
+# Should we check for updates?
+check-for-update: true
+
+
+ # Should you take fall damage after being pushed backwards?
+enable-fall-damage: true
 
  # How many blocks away should we detect before pushing?
  # EXAMPLE: Player X has pushback on, and Player Y gets within 5 blocks of Player X, Player Y will be thrown back.
 push-back-length: 5
 
- # Should we check for updates?
-check-for-update: true
-
- # Should you take fall damage after being pushed backwards?
-enable-fall-damage: true
-
- # Sounds !!!  |  MUST BE A VALID 1.8 SOUND ONLY !!!
-sounds-enabled: true
-sound-effect: ANVIL_LAND # The sound played to the player who gets pushed back
-sound-effect-2: ANVIL_LAND # The sound played to the player who pushed someone away
-
- # Particles !!! | MUST BE A VALID 1.8 PARTICLE ONLY !!!
-particles-enabled: true
-particle: MOBSPAWNER_FLAMES # The particle played to the player who gets pushed back
 
 
-# Permissions
-
+# --- Permissions ---
 
  # Permission to use /pushback
 permission: 'pushback.use'
@@ -37,8 +28,7 @@ reload-message: '&aSuccessfully reloaded PushBack!'
 multiplayer-permission: 'pushback.multiplayer'
 
 
-# Messages
-
+# --- Messages ---
 
  # Message sent if you don't have permission to use /pushback, or /pushback (player)
 no-permission: '&cYou do not have permission to use this command!'
@@ -53,7 +43,3 @@ executor-disabled-message: '&cYou have disabled PushBack for &e%player%&c!'
 # If you encounter an error or problem, contact me at Raymond#0001
 
 # Copyright Reflexian Inc. 2020, all rights reserved.
-
-# DO NOT EDIT
-config-version: 4.1
-# DO NOT EDIT
